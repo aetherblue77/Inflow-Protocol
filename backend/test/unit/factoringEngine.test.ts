@@ -93,6 +93,7 @@ describe("Factoring Engine RWA System", function () {
             const {
                 engine,
                 usdc,
+                invoiceNFT,
                 admin,
                 freelancer,
                 treasury,
@@ -129,6 +130,9 @@ describe("Factoring Engine RWA System", function () {
             expect(await usdc.balanceOf(freelancer.address)).to.equal(expectedNetToFreelancer)
             // Treasury must receive 8 USDC (FIRST CASHFLOW!)
             expect(await usdc.balanceOf(treasury.address)).to.equal(expectedUpfrontFee)
+
+            // 4. Verify NFT Custody 
+            expect(await invoiceNFT.ownerOf(0)).to.equal(await engine.getAddress())
         })
 
         it("Should execute funding even if Upfront Fee is Zero (Small Advance)", async function () {

@@ -129,7 +129,7 @@ contract FactoringEngine is Ownable {
 
         // B. Mint NFT as proof of ownership
         uint256 newInvoiceId = invoiceNft.mintInvoice(
-            msg.sender, // Owner of NFT (Admin)
+            address(this), // Owner of NFT (Factoring Engine)
             _issuer, // Freelancer
             _uri,
             _totalAmount,
